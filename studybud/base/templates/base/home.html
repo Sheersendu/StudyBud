@@ -14,15 +14,21 @@
 
 {% block content%}
 
-<h1>Home template</h1>
-{% for room in rooms %}
 <div>
-    <!-- The following is hardcoding the url but if url changes it will not work so we reference using name thats set in urls.py-->
-    <!-- <h3>{{ room.id }} == <a href="room/{{room.id}}">{{ room.name }}</a></h3> -->
-    <span>@{{room.host.username}}</span>
-    <h3>{{ room.id }} == <a href="{% url 'room' room.id %}">{{ room.name }}</a></h3>
-    <small>{{room.topic}}</small>
-    <hr>
+    <a href="{% url 'create-room' %}">Create Room</a>
+    <div>
+        {% for room in rooms %}
+        <div>
+            <a href="{% url 'update-room' room.id %}">Edit room</a>
+            <a href="{% url 'delete-room' room.id %}">Delete room</a>
+            <!-- The following is hardcoding the url but if url changes it will not work so we reference using name thats set in urls.py-->
+            <!-- <h3>{{ room.id }} == <a href="room/{{room.id}}">{{ room.name }}</a></h3> -->
+            <span>@{{room.host.username}}</span>
+            <h5>{{ room.id }} == <a href="{% url 'room' room.id %}">{{ room.name }}</a></h5>
+            <small>{{room.topic.name}}</small>
+            <hr>
+        </div>
+    </div>
 </div>
 {% endfor %}
 
